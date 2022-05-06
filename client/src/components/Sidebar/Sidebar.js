@@ -19,6 +19,7 @@ const Sidebar = () => {
 
 
 
+
     useEffect(() => {
         const q = query(collection(db, 'rooms'), orderBy('created', 'desc'))
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -26,6 +27,7 @@ const Sidebar = () => {
                 id: doc.id,
                 data: doc.data()
             })))
+            console.log(rooms)
         })
 
         return () => {
@@ -66,6 +68,7 @@ const Sidebar = () => {
                         id={room.id}
                         key={room.id}
                         name={room.data.name}
+                        userImg={room.data.madeByImg}
                     />
                 ))}
             </div>

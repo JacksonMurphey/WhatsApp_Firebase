@@ -16,9 +16,7 @@ function App() {
       <div className="app">
         {!user
           ?
-          (
-            <Login />
-          )
+          (<Login />)
           :
           (
             <div className="app__body">
