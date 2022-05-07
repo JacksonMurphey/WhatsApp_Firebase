@@ -30,11 +30,11 @@ const Login = () => {
             .catch((error) => {
                 // const errCode = error.code
                 const errMessage = error.message
+                console.log(errMessage)
                 // The email of the user's account used.
                 // const email = error.email
                 // The AuthCredential type that was used.
                 // const credential = GoogleAuthProvider.credentialFromError(error)
-                console.log(errMessage)
             })
     }
 

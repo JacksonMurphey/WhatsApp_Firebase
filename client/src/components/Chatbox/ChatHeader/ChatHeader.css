@@ -1,0 +1,57 @@
+.chat__header {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid lightgray;
+}
+
+.chat__headerInfo {
+  flex: 1;
+  padding-left: 20px;
+}
+
+.chat__headerRight {
+  display: flex;
+  justify-content: space-between;
+  min-width: 100px;
+}
+
+.chat__headerInfo > h3 {
+  margin-bottom: 3px;
+  font-weight: 500;
+}
+
+.chat__headerInfo > p {
+  color: gray;
+}
+
+.chat__headerRight > .search__ChatContainer {
+  margin-top: 10px;
+  max-width: 175px;
+  overflow: hidden;
+}
+
+.search__ChatContainer {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  width: 100%;
+  height: 30px;
+  border-radius: 20px;
+}
+
+/* Targeting the Material-UI Icon */
+.search__ChatContainer > .MuiSvgIcon-root {
+  color: gray;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.search__ChatContainer > input {
+  border: none;
+  min-width: 65px;
+
+  /* outline-width removes the border of the input box once focused!! */
+  outline-width: 0;
+  /* margin-left: 5px; */
+}

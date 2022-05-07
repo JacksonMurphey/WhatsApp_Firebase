@@ -2,10 +2,12 @@
 
 export const initialState = {
     user: null,
+    roomName: null,
 }
 
 export const actionTypes = {
     SET_USER: "SET_USER",
+    SET_ROOM: "SET_ROOM",
 }
 
 const reducer = (state, action) => {
@@ -17,6 +19,12 @@ const reducer = (state, action) => {
                 ...state,
                 user: action.user
             }
+        case actionTypes.SET_ROOM:
+            return {
+                ...state,
+                roomName: action.roomName
+            }
+
         default:
             return state
     }
