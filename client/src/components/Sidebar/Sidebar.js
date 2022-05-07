@@ -1,23 +1,24 @@
 import React, { useEffect, useState } from 'react'
+import './Sidebar.css'
+
+//component imports
+import Header from './Header/Header'
+import SidebarChat from './SidebarChat';
+import Search from './Search/Search';
+
+//firebase imports
 import db from '../../firebase'
 import { onSnapshot, collection, query, orderBy } from 'firebase/firestore'
 
-import './Sidebar.css'
-
-import DonutLargeIcon from '@material-ui/icons/DonutLarge';
-import ChatIcon from '@material-ui/icons/Chat';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import SearchIcon from '@material-ui/icons/Search';
-import { IconButton, Avatar } from '@material-ui/core';
-import SidebarChat from './SidebarChat';
+//context/reducer imports
 import { useStateValue } from '../../store/UserProvider';
+
 
 const Sidebar = () => {
 
     const [rooms, setRooms] = useState([])
+    const [searchTerm, setSearchTerm] = useState('')
     const [{ user }, dispatch] = useStateValue()
-
-
 
 
     useEffect(() => {
@@ -29,41 +30,27 @@ const Sidebar = () => {
             })))
             console.log(rooms)
         })
-
         return () => {
             unsubscribe() //removes the listener when invoked
-
         }
     }, [])
 
+    //Creating filter for search purposes
+    let filteredRooms = rooms.filter((room) => room.data.name.includes(searchTerm))
+
+    // const deleteFilter = id => {
+    //     const filter = filteredRooms.filter(room => room.id !== id)
+    //     filteredRooms = filter
+    // }
 
     return (
         <div className="sidebar">
-            <div className="sidebar__header">
-                <Avatar src={user?.photoURL} />
-                <div className="sidebar__headerRight">
-                    <IconButton>
-                        <DonutLargeIcon />
-                    </IconButton>
-                    <IconButton>
-                        <ChatIcon />
-                    </IconButton>
-                    <IconButton>
-                        <MoreVertIcon />
-                    </IconButton>
-                </div>
-            </div>
-
-            <div className="sidebar__search">
-                <div className="sidebar__searchContainer">
-                    <SearchIcon />
-                    <input type="text" placeholder='Search or Start new chat' />
-                </div>
-            </div>
+            <Header user={user} />
+            <Search setSearchTerm={setSearchTerm} />
 
             <div className="sidebar__chats">
                 <SidebarChat addNewChat />
-                {rooms.map((room) => (
+                {filteredRooms.map((room) => (
                     <SidebarChat
                         id={room.id}
                         key={room.id}

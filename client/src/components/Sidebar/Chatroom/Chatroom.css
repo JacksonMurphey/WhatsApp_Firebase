@@ -1,0 +1,53 @@
+.chatroom {
+  display: flex;
+  padding: 20px;
+  cursor: pointer;
+  border-bottom: 1px solid #f6f6f6;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.chatroom:hover {
+  background-color: #fbfbfb;
+}
+
+.chatroom__info > h2 {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.chatroom__info {
+  margin-left: 15px;
+}
+
+.btn {
+  display: flex;
+  justify-content: end;
+  position: relative;
+  z-index: 1;
+  height: 2px;
+  margin-right: 10px;
+}
+
+.btn > .MuiButtonBase-root,
+.btn > .MuiIconButton-root {
+  text-decoration: none;
+  /* background-color: white; */
+  background-color: #fbfbfb71;
+
+  width: 1px;
+  color: rgba(161, 161, 161, 0);
+}
+
+.btn > .MuiButtonBase-root:hover,
+.btn > .MuiIconButton-root:hover {
+  background-color: white;
+  color: red;
+}
+
+/* .btn > svg > .MuiSvgIcon-root {
+  width: 5px;
+} */

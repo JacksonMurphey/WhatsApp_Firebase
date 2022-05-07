@@ -1,11 +1,15 @@
-import { Avatar } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import Chatroom from './Chatroom/Chatroom'
 import './SidebarChat.css'
 
-import { useStateValue } from '../../store/UserProvider'
+//firebase imports
 import db from '../../firebase'
-import { collection, addDoc, Timestamp, onSnapshot, query, orderBy } from 'firebase/firestore'
+import { collection, addDoc, Timestamp, onSnapshot, query, orderBy, doc, deleteDoc } from 'firebase/firestore'
+
+//context/reducer imports 
+import { useStateValue } from '../../store/UserProvider'
+
+
 
 const SidebarChat = (props) => {
 
@@ -14,16 +18,11 @@ const SidebarChat = (props) => {
     const [{ user }, dispatch] = useStateValue()
     const [lastMsg, setLastMsg] = useState([])
 
-
-
-
     useEffect(() => {
         setSeed(Math.floor(Math.random() * 5000))
     }, [])
     const tempImg = `https://avatars.dicebear.com/api/human/${seed}.svg`
     const appImg = "https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
-
-
 
 
     const createChat = async () => {
@@ -42,6 +41,18 @@ const SidebarChat = (props) => {
         }
     }
 
+    // const deleteRoom = async (id) => {
+    //     if (!id) return
+
+    //     try {
+    //         await deleteDoc(doc(db, 'rooms', id))
+    //     }
+    //     catch (err) {
+    //         alert(err)
+    //     }
+    // }
+
+
     useEffect(() => {
         if (id) {
             const q = query(collection(db, 'rooms', id, 'messages'), orderBy('timestamp', 'desc'))
@@ -56,25 +67,16 @@ const SidebarChat = (props) => {
     }, [id])
 
 
-    const lastmessage = (string) => {
-        if (string?.length > 25) {
-            return (string.substring(0, 25) + "...")
-        } else {
-            return string
-        }
-    }
-
     return !addNewChat ?
         (
-            <Link to={`/rooms/${id}`} style={{ textDecoration: "none" }}>
-                <div className='sidebarChat' id={id}>
-                    <Avatar src={userImg ? userImg : tempImg} />
-                    <div className="sidebarChat__info">
-                        <h2>{name}</h2>
-                        <p>{lastmessage(lastMsg[0]?.message)}</p>
-                    </div>
-                </div>
-            </Link>
+            <Chatroom
+                id={id}
+                userImg={userImg}
+                tempImg={tempImg}
+                name={name}
+                lastMsg={lastMsg}
+            // deleteRoom={deleteRoom}
+            />
         )
         :
         (
