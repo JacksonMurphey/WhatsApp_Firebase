@@ -38,7 +38,7 @@ const Chat = () => {
             //         }
             //     })
             // })
-            // at first I couldnt find in the firebase docs, how to query 
+            // at first in the docs i could not find how to query 
             //where('id', '==', roomId).. So I instead queried my collection, then looped thru it and checked, then set the name. This worked.
 
             //---HOW TO FIND ONE DOC FROM COLLECTION---
@@ -64,7 +64,7 @@ const Chat = () => {
         }
     }, [roomId])
 
-    //This return an array of objects containing all messages
+    //This returns an array of objects containing all messages
     // const colref = collectionGroup(db, 'messages')
     // const getData = () => {
     //     getDocs(colref)
@@ -82,15 +82,18 @@ const Chat = () => {
 
     const sendMessageHandler = async (e) => {
         e.preventDefault()
-        try {
-            await addDoc(collection(db, 'rooms', roomId, 'messages'), {
-                message: input,
-                name: user.displayName,
-                timestamp: Timestamp.now()
-            })
-        } catch (err) {
-            alert(err)
+        if (e) {
+            try {
+                await addDoc(collection(db, 'rooms', roomId, 'messages'), {
+                    message: input,
+                    name: user.displayName,
+                    timestamp: Timestamp.now()
+                })
+            } catch (err) {
+                alert(err)
+            }
         }
+
         setInput('')
     }
 
@@ -106,6 +109,7 @@ const Chat = () => {
 
             <ChatFooter input={input} setInput={setInput}
                 sendMessageHandler={sendMessageHandler} />
+
         </div>
     )
 }

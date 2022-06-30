@@ -12,14 +12,14 @@ const ChatFooter = (props) => {
     return (
         <div className='chat__footer'>
             <InsertEmoticonIcon />
-            <form>
+            <form onSubmit={sendMessageHandler}>
                 <input
                     type='text'
                     value={input}
                     onChange={e => setInput(e.target.value)}
                     placeholder='Type a message'
                 />
-                <button onClick={sendMessageHandler} type='submit'>Send a message</button>
+                <button type='submit'>Send a message</button>
             </form>
             <MicIcon />
         </div>

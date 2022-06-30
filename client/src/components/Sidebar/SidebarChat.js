@@ -41,16 +41,16 @@ const SidebarChat = (props) => {
         }
     }
 
-    // const deleteRoom = async (id) => {
-    //     if (!id) return
+    const deleteRoom = async (id) => {
+        if (!id) return
 
-    //     try {
-    //         await deleteDoc(doc(db, 'rooms', id))
-    //     }
-    //     catch (err) {
-    //         alert(err)
-    //     }
-    // }
+        try {
+            await deleteDoc(doc(db, 'rooms', id))
+        }
+        catch (err) {
+            alert(err)
+        }
+    }
 
 
     useEffect(() => {
@@ -75,7 +75,7 @@ const SidebarChat = (props) => {
                 tempImg={tempImg}
                 name={name}
                 lastMsg={lastMsg}
-            // deleteRoom={deleteRoom}
+                deleteRoom={deleteRoom}
             />
         )
         :
