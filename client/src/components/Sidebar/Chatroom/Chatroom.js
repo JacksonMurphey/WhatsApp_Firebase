@@ -20,9 +20,10 @@ const Chatroom = (props) => {
         }
     }
 
+
     return (
         <Link to={`/rooms/${id}`}>
-            <div className="btn">
+            <div className="btn" onClick={() => deleteRoom(id)}>
                 <IconButton>
                     <HighlightOffOutlinedIcon />
                 </IconButton>
